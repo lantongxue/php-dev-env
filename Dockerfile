@@ -13,9 +13,15 @@ COPY conf/php/fpm/php.ini /etc/php/7.4/fpm/php.ini
 COPY conf/php/fpm/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 COPY conf/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY conf/nginx/pathinfo.conf /etc/nginx/pathinfo.conf
+COPY conf/nginx/php7.4-fpm.conf /etc/nginx/php7.4-fpm.conf
+COPY conf/nginx/sites-enabled/default /etc/nginx/sites-enabled/default
 
 COPY conf/init.d/php7.4-fpm /etc/init.d/php7.4-fpm
 RUN chmod +x /etc/init.d/php7.4-fpm
 
-RUN service nginx start
-RUN service php7.4-fpm start
+COPY entrypoint.sh /entrypoint.sh
+
+EXPOSE 80 443
+
+ENTRYPOINT [ "/bin/bash", "/entrypoint.sh" ]
