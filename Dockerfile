@@ -1,4 +1,5 @@
 FROM debian:bullseye
+LABEL org.opencontainers.image.source = "https://github.com/lantongxue/php-dev-env"
 RUN apt update && apt upgrade -y
 RUN apt install apt-transport-https curl lsb-release wget net-tools inetutils-ping -y
 RUN curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
